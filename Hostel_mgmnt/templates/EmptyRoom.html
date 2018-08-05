@@ -1,0 +1,70 @@
+{%load staticfiles%}
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TZ-18</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{%static 'js/jquery.min.js'%}"></script>
+	<script src="{%static 'js/jquery-3.3.1.js'%}"></script>
+	<style>
+      label{
+           font-weight: bold;
+      }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+    {%include 'navigation_bar.html '%}
+    <!--End of Navigation Bar-->
+    <div style="margin-top:80px;">
+    	<div style="width: 40%; margin: auto; border: 2px solid black; padding: 10px;border-radius: 2%">
+    		<h3>Empty Rooms</h3>
+    		<hr>
+    		<table class="table table-striped">
+          <tr>
+            <td>Room No.</td>
+            <td>Capicity</td>
+            <td>Availability</td>
+            <td>Book</td>
+          </tr>
+          {% for data in Data %}
+          <tr>
+            <td>{{ data.roomNo }}</td>
+            <td>{{ data.capacity }}</td>
+            <td>{{ data.availability }}</td>
+            {% if data.availability %}
+            <td><a href="../EnterTzId/?roomNo={{ data.roomNo }}" class="btn btn-success">Click</a></td>
+            {%else%}
+            <td></td>
+            {%endif%}
+          </tr>
+          {%endfor%}
+        </table>
+    	</div>
+    </div>
+    <!--<script>
+    	$('#sub').click(function(){
+    	   var data=$('#tzid').val()+','+$('#sname').val()+','+$('input[name=name_of_your_radiobutton]:checked').val()+','+$('#input[name=opt]:checked').val()+','+$('#con').val()+','+$('#email').val()+','+$('#ins').val()+','+$('#sname').val();
+    	   alert('Data Is'+data);
+    	   $.ajax({
+           method:'POST',
+           url:'../saveData',
+           data:{str:data},
+           success:function(data){
+           	  console.log('Cool');
+            },
+           error:function(data){
+              console.log('Sorry Somthing Wrong');
+           }
+       })
+    	})
+   </script>
+   -->
+</body>
+
+</html>
